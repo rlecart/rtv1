@@ -6,17 +6,25 @@
 /*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 02:40:47 by rlecart           #+#    #+#             */
-/*   Updated: 2017/07/11 07:12:28 by rlecart          ###   ########.fr       */
+/*   Updated: 2017/07/12 00:45:42 by rlecart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rtv1.h>
+
+int		set_cam(t_rt *e)
+{
+	ft_memset(e->cam.pos, 0, sizeof(e->cam.pos));
+	ft_memset(e->cam.dir, 0, sizeof(e->cam.dir));
+	return (0);
+}
 
 void	get_camera(t_rt *e, char **scene)
 {
 	int		i;
 
 	i = 0;
+	set_cam(e);
 	while (scene[i])
 	{
 		if (scene[i][0] && scene[i][0] != '\t')

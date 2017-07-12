@@ -6,7 +6,7 @@
 #    By: rlecart <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/29 00:43:30 by rlecart           #+#    #+#              #
-#    Updated: 2017/07/11 07:26:19 by rlecart          ###   ########.fr        #
+#    Updated: 2017/07/12 03:41:30 by rlecart          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,11 +47,11 @@ all: mlx lib gra $(NAME)
 $(NAME): $(MINILIBX) $(LIBFT) $(GRAPHICS) $(BINDIR) $(OBJ)
 	@printf "\r$(GREEN)[$(PROJECT)] Bin compilation done.                                                        \n"
 	@printf "$(YELLOW)[$(PROJECT)] Compiling $(NAME)..."
-	@$(CC) $(CFLAGS) $(MLXF) -o $(NAME) $(OBJ) $(MINILIBX) $(LIBFT) $(GRAPHICS)
+	@$(CC) $(CFLAGS) $(MLXF) -o $(NAME) $(OBJ) $(MINILIBX) $(LIBFT) $(GRAPHICS) -g
 	@printf "\r$(GREEN)[$(PROJECT)] Compilation done.                          \n$(NO_COLOR)"
 
 $(BINDIR)%.o: $(SRCDIR)%.c
-	@printf "$(YELLOW)\r[$(PROJECT)] Compiling $< to $@                                                          \r"
+	@printf "$(YELLOW)\r[$(PROJECT)] Compiling $< to $@ -g                                                          \r"
 	@$(CC) $(CFLAGS) -o $@ -c $<
 
 mlx:
