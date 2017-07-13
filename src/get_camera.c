@@ -6,17 +6,16 @@
 /*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 02:40:47 by rlecart           #+#    #+#             */
-/*   Updated: 2017/07/12 00:45:42 by rlecart          ###   ########.fr       */
+/*   Updated: 2017/07/13 03:49:18 by rlecart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rtv1.h>
 
-int		set_cam(t_rt *e)
+void	set_cam(t_rt *e)
 {
-	ft_memset(e->cam.pos, 0, sizeof(e->cam.pos));
-	ft_memset(e->cam.dir, 0, sizeof(e->cam.dir));
-	return (0);
+	ft_memset(CAM.pos, 0, sizeof(CAM.pos));
+	ft_memset(CAM.dir, 0, sizeof(CAM.dir));
 }
 
 void	get_camera(t_rt *e, char **scene)
@@ -35,9 +34,9 @@ void	get_camera(t_rt *e, char **scene)
 				while (scene[i] && scene[i][0] && scene[i][0] == '\t')
 				{
 					if (!(ft_strncmp(scene[i], "\tpos:", 5)))
-						get_pos(&e->cam.pos, scene, i);
+						get_pos(&CAM.pos, scene, i);
 					if (!(ft_strncmp(scene[i], "\tdir:", 5)))
-						get_dir(&e->cam.dir, scene, i);
+						get_dir(&CAM.dir, scene, i);
 					i++;
 				}
 			}

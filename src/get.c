@@ -6,7 +6,7 @@
 /*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 04:06:08 by rlecart           #+#    #+#             */
-/*   Updated: 2017/07/12 02:06:49 by rlecart          ###   ########.fr       */
+/*   Updated: 2017/07/13 07:56:11 by rlecart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	get_pos(float (*bpos)[3], char **scene, int i)
 {
 	char	**pos;
 
-	pos = split_wc(scene[i], ' ');
+	pos = ft_strsplit_wc(scene[i], ' ');
 	if (pos[1] && pos[2] && pos[3])
 	{
 		(*bpos)[0] = ft_atof(pos[1]);
@@ -30,7 +30,7 @@ void	get_dir(float (*bdir)[3], char **scene, int i)
 {
 	char	**dir;
 
-	dir = split_wc(scene[i], ' ');
+	dir = ft_strsplit_wc(scene[i], ' ');
 	if (dir[1] && dir[2] && dir[3])
 	{
 		(*bdir)[0] = ft_atof(dir[1]);
@@ -44,7 +44,7 @@ void	get_col(float (*bcol)[4], char **scene, int i)
 {
 	char	**col;
 
-	col = split_wc(scene[i], ' ');
+	col = ft_strsplit_wc(scene[i], ' ');
 	if (col[1] && col[2] && col[3])
 	{
 		(*bcol)[0] = ft_atof(col[1]);
@@ -59,7 +59,7 @@ void	get_radius(float *brad, char **scene, int i)
 {
 	char	**rad;
 
-	rad = split_wc(scene[i], ' ');
+	rad = ft_strsplit_wc(scene[i], ' ');
 	if (rad[1])
 		*brad = ft_atof(rad[1]);
 	ft_strtabdel(&rad);

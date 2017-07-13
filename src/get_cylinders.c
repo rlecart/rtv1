@@ -6,7 +6,7 @@
 /*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 03:47:55 by rlecart           #+#    #+#             */
-/*   Updated: 2017/07/12 00:45:10 by rlecart          ###   ########.fr       */
+/*   Updated: 2017/07/13 03:36:27 by rlecart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 void	new_cylinder(t_rt *e, int *i)
 {
-	if (!(e->obj.cylinders->next = (t_cylinders*)malloc(sizeof(t_cylinders))))
+	if (!(CYLINDERS->next = (t_cylinders*)malloc(sizeof(t_cylinders))))
 		exit(-1);
-	e->obj.cylinders->next->before = e->obj.cylinders;
-	e->obj.cylinders->next->next = NULL;
-	e->obj.cylinders = e->obj.cylinders->next;
-	ft_memset(e->obj.cylinders, 0, sizeof(e->obj.cylinders));
+	CYLINDERS->next->before = CYLINDERS;
+	CYLINDERS->next->next = NULL;
+	CYLINDERS = CYLINDERS->next;
+	ft_memset(CYLINDERS, 0, sizeof(CYLINDERS));
 	(*i)++;
 }
 
 void	first_cylinder(t_rt *e, int *i)
 {
-	if (!(e->obj.cylinders = (t_cylinders*)malloc(sizeof(t_cylinders))))
+	if (!(CYLINDERS = (t_cylinders*)malloc(sizeof(t_cylinders))))
 		exit(-1);
-	e->obj.cylinders->before = NULL;
-	e->obj.cylinders->next = NULL;
-	ft_memset(e->obj.cylinders, 0, sizeof(e->obj.cylinders));
+	CYLINDERS->before = NULL;
+	CYLINDERS->next = NULL;
+	ft_memset(CYLINDERS, 0, sizeof(CYLINDERS));
 	(*i)++;
 }
 
@@ -50,14 +50,14 @@ void	get_cylinders(t_rt *e, char **scene)
 					if (scene[i] && !(ft_strcmp(scene[++i], "\tnew:")))
 						new_cylinder(e, &i);
 					if (!(ft_strncmp(scene[i], "\t\tpos:", 6)))
-						get_pos(&e->obj.cylinders->pos, scene, i);
+						get_pos(&CYLINDERS->pos, scene, i);
 					if (!(ft_strncmp(scene[i], "\t\tradius:", 9)))
-						get_radius(&e->obj.cylinders->radius, scene, i);
+						get_radius(&CYLINDERS->radius, scene, i);
 					if (!(ft_strncmp(scene[i], "\t\tcolor:", 8)))
-						get_col(&e->obj.cylinders->color, scene, i);
+						get_col(&CYLINDERS->color, scene, i);
 				}
 			}
 		}
-	while (e->obj.cylinders->before)
-		e->obj.cylinders = e->obj.cylinders->before;
+	while (CYLINDERS->before)
+		CYLINDERS = CYLINDERS->before;
 }

@@ -6,7 +6,7 @@
 /*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 03:48:22 by rlecart           #+#    #+#             */
-/*   Updated: 2017/07/12 00:45:05 by rlecart          ###   ########.fr       */
+/*   Updated: 2017/07/13 03:36:27 by rlecart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 void	new_plane(t_rt *e, int *i)
 {
-	if (!(e->obj.planes->next = (t_planes*)malloc(sizeof(t_planes))))
+	if (!(PLANES->next = (t_planes*)malloc(sizeof(t_planes))))
 		exit(-1);
-	e->obj.planes->next->before = e->obj.planes;
-	e->obj.planes->next->next = NULL;
-	e->obj.planes = e->obj.planes->next;
-	ft_memset(e->obj.planes, 0, sizeof(e->obj.planes));
+	PLANES->next->before = PLANES;
+	PLANES->next->next = NULL;
+	PLANES = PLANES->next;
+	ft_memset(PLANES, 0, sizeof(PLANES));
 	(*i)++;
 }
 
 void	first_plane(t_rt *e, int *i)
 {
-	if (!(e->obj.planes = (t_planes*)malloc(sizeof(t_planes))))
+	if (!(PLANES = (t_planes*)malloc(sizeof(t_planes))))
 		exit(-1);
-	e->obj.planes->before = NULL;
-	e->obj.planes->next = NULL;
-	ft_memset(e->obj.planes, 0, sizeof(e->obj.planes));
+	PLANES->before = NULL;
+	PLANES->next = NULL;
+	ft_memset(PLANES, 0, sizeof(PLANES));
 	(*i)++;
 }
 
@@ -50,14 +50,14 @@ void	get_planes(t_rt *e, char **scene)
 					if (scene[i] && !(ft_strcmp(scene[++i], "\tnew:")))
 						new_plane(e, &i);
 					if (!(ft_strncmp(scene[i], "\t\tpos:", 6)))
-						get_pos(&e->obj.planes->pos, scene, i);
+						get_pos(&PLANES->pos, scene, i);
 					if (!(ft_strncmp(scene[i], "\t\tdist:", 7)))
-						get_radius(&e->obj.planes->dist, scene, i);
+						get_radius(&PLANES->dist, scene, i);
 					if (!(ft_strncmp(scene[i], "\t\tcolor:", 8)))
-						get_col(&e->obj.planes->color, scene, i);
+						get_col(&PLANES->color, scene, i);
 				}
 			}
 		}
-	while (e->obj.planes->before)
-		e->obj.planes = e->obj.planes->before;
+	while (PLANES->before)
+		PLANES = PLANES->before;
 }

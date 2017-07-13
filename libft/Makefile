@@ -6,7 +6,7 @@
 #    By: pbernier <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/21 03:19:16 by pbernier          #+#    #+#              #
-#    Updated: 2017/07/11 06:05:34 by rlecart          ###   ########.fr        #
+#    Updated: 2017/07/13 07:56:41 by rlecart          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,7 +93,8 @@ SRC			=	ft_putstr.c \
 				ft_lowercase.c \
 				ft_uppercase.c \
 				ft_get_file.c \
-				ft_atof.c
+				ft_atof.c \
+				ft_strsplit_wc.c
 OBJ			=	$(addprefix $(BINDIR),$(SRC:.c=.o))
 CC			=	gcc
 CFLAGS		=	-Wall -Werror -Wextra -I includes/

@@ -6,7 +6,7 @@
 /*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 03:48:36 by rlecart           #+#    #+#             */
-/*   Updated: 2017/07/12 01:13:35 by rlecart          ###   ########.fr       */
+/*   Updated: 2017/07/13 04:05:36 by rlecart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 void	new_spot(t_rt *e, int *i)
 {
-	if (!(e->obj.spots->next = (t_spots*)malloc(sizeof(t_spots))))
+	if (!(SPOTS->next = (t_spots*)malloc(sizeof(t_spots))))
 		exit(-1);
-	ft_memset(e->obj.spots->next, 0, sizeof(e->obj.spots));
-	e->obj.spots->next->before = e->obj.spots;
-	e->obj.spots->next->next = NULL;
-	e->obj.spots = e->obj.spots->next;
+	ft_memset(SPOTS->next, 0, sizeof(SPOTS));
+	SPOTS->next->before = SPOTS;
+	SPOTS->next->next = NULL;
+	SPOTS = SPOTS->next;
 	(*i)++;
 }
 
 void	first_spot(t_rt *e, int *i)
 {
-	if (!(e->obj.spots = (t_spots*)malloc(sizeof(t_spots))))
+	if (!(SPOTS = (t_spots*)malloc(sizeof(t_spots))))
 		exit(-1);
-	ft_memset(e->obj.spots, 0, sizeof(e->obj.spots));
-	e->obj.spots->before = NULL;
-	e->obj.spots->next = NULL;
+	ft_memset(SPOTS, 0, sizeof(SPOTS));
+	SPOTS->before = NULL;
+	SPOTS->next = NULL;
 	*i += 2;
 }
 
@@ -48,15 +48,15 @@ void	get_spots(t_rt *e, char **scene)
 				while (scene[i] && scene[i][0] && scene[i][0] == '\t')
 				{
 					if (!(ft_strncmp(scene[i], "\t\tcolor:", 8)))
-						get_col(&e->obj.spots->color, scene, i);
+						get_col(&SPOTS->color, scene, i);
 					if (!(ft_strncmp(scene[i], "\t\tpos:", 6)))
-						get_pos(&e->obj.spots->pos, scene, i);
+						get_pos(&SPOTS->pos, scene, i);
 					i++;
 					if (scene[i] && !(ft_strcmp(scene[i], "\tnew:")))
 						new_spot(e, &i);
 				}
 			}
 		}
-	while (e->obj.spots->before)
-		e->obj.spots = e->obj.spots->before;
+	while (SPOTS->before)
+		SPOTS = SPOTS->before;
 }

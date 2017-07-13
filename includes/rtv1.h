@@ -6,7 +6,7 @@
 /*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/10 20:36:04 by rlecart           #+#    #+#             */
-/*   Updated: 2017/07/12 00:40:54 by rlecart          ###   ########.fr       */
+/*   Updated: 2017/07/13 08:10:20 by rlecart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,15 @@
 
 # include <../libft/includes/libft.h>
 # include <../graphics/includes/graphics.h>
+
+# define MLX e->mlx
+# define WIN e->win
+# define CAM e->cam
+# define SPHERES e->obj.spheres
+# define CYLINDERS e->obj.cylinders
+# define CONES  e->obj.cones
+# define PLANES e->obj.planes
+# define SPOTS e->obj.spots
 
 typedef struct		s_spheres
 {
@@ -83,8 +92,7 @@ typedef struct			s_rt
 	t_obj				obj;
 }						t_rt;
 
-int						init(t_rt *e, char *file);
-char					**split_wc(char *str, char c);
+void					init(t_rt *e, char *file);
 void					get_camera(t_rt *e, char **scene);
 void					get_spheres(t_rt *e, char **scene);
 void					get_cylinders(t_rt *e, char **scene);
@@ -96,5 +104,9 @@ void					get_pos(float (*bpos)[3], char **scene, int i);
 void					get_dir(float (*bdir)[3], char **scene, int i);
 void					get_col(float (*bcol)[4], char **scene, int i);
 void					get_radius(float *brad, char **scene, int i);
+
+void					stop_rt(t_rt *e);
+
+void					print_debug(t_rt *e);
 
 #endif
