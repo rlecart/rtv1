@@ -6,7 +6,7 @@
 /*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/10 20:38:26 by rlecart           #+#    #+#             */
-/*   Updated: 2017/07/13 08:10:25 by rlecart          ###   ########.fr       */
+/*   Updated: 2017/07/31 20:16:36 by rlecart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	get_conf(t_rt *e, char **scene)
 
 void	init(t_rt *e, char *file)
 {
+	int		i;
 	char	**scene;
 
 	if (!(scene = ft_get_file(file)))
@@ -37,5 +38,8 @@ void	init(t_rt *e, char *file)
 	get_conf(e, scene);
 	MLX = mlx_init();
 	WIN = mlx_new_window(MLX, WIN_W, WIN_H, "Khey Trassing");
+	e->img = mlx_new_image(MLX, WIN_W, WIN_H);
+	e->data = mlx_get_data_addr(e->img, &i, &i, &i);
+	mlx_key_hook(WIN, key_hook, e);
 	ft_strtabdel(&scene);
 }

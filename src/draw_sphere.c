@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   draw_sphere.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 01:32:26 by rlecart           #+#    #+#             */
-/*   Updated: 2017/07/31 19:06:29 by rlecart          ###   ########.fr       */
+/*   Created: 2017/07/31 19:49:56 by rlecart           #+#    #+#             */
+/*   Updated: 2017/07/31 20:28:33 by rlecart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include <rtv1.h>
 
-int		ft_strncmp(const char *s1, const char *s2, size_t n)
+void	draw_sphere(t_spheres *o)
 {
-	unsigned int		i;
+	t_color		pix;
+	t_color		bpix;
 
-	i = 0;
-	if (!s1 || !s2)
-		return (-1);
-	while (i < n && (s1[i] || s2[i]))
-	{
-		if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		i++;
-	}
-	return (0);
+	pix = get_color(o->color[2], o->color[1], o->color[0], o->color[3]);
+	bpix = get_color(0, 0, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 03:48:09 by rlecart           #+#    #+#             */
-/*   Updated: 2017/07/13 03:49:24 by rlecart          ###   ########.fr       */
+/*   Updated: 2017/07/31 19:33:50 by rlecart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,25 @@ void	first_cone(t_rt *e, int *i)
 	(*i)++;
 }
 
+void	get_cones_values(t_rt *e, char **scene, int *i)
+{
+	if (scene[*i] && !(ft_strcmp(scene[++(*i)], "\tnew:")))
+		new_cone(e, i);
+	if (!(ft_strncmp(scene[*i], "\t\tpos:", 6)))
+		get_pos(&CONES->pos, scene, *i);
+	if (!(ft_strncmp(scene[*i], "\t\tradius:", 9)))
+		get_radius(&CONES->radius, scene, *i);
+	if (!(ft_strncmp(scene[*i], "\t\tcolor:", 8)))
+		get_col(&CONES->color, scene, *i);
+}
+
 void	get_cones(t_rt *e, char **scene)
 {
 	int		i;
 
-	i = -1;
-	while (scene[++i])
+	i = 0;
+	while (scene[i])
+	{
 		if (scene[i][0] && scene[i][0] != '\t')
 		{
 			if (!(ft_strcmp(scene[i], "cones:"))
@@ -46,18 +59,12 @@ void	get_cones(t_rt *e, char **scene)
 			{
 				first_cone(e, &i);
 				while (scene[i] && scene[i][0] && scene[i][0] == '\t')
-				{
-					if (scene[i] && !(ft_strcmp(scene[++i], "\tnew:")))
-						new_cone(e, &i);
-					if (!(ft_strncmp(scene[i], "\t\tpos:", 6)))
-						get_pos(&CONES->pos, scene, i);
-					if (!(ft_strncmp(scene[i], "\t\tradius:", 9)))
-						get_radius(&CONES->radius, scene, i);
-					if (!(ft_strncmp(scene[i], "\t\tcolor:", 8)))
-						get_col(&CONES->color, scene, i);
-				}
+					get_cones_values(e, scene, &i);
 			}
 		}
-	while (CONES->before)
+		if (scene[i])
+			i++;
+	}
+	while (CONES && CONES->before)
 		CONES = CONES->before;
 }

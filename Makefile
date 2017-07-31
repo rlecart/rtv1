@@ -6,7 +6,7 @@
 #    By: rlecart <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/29 00:43:30 by rlecart           #+#    #+#              #
-#    Updated: 2017/07/13 00:40:40 by rlecart          ###   ########.fr        #
+#    Updated: 2017/07/31 20:06:09 by rlecart          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,13 @@ SRC			=	main.c \
 				get_cylinders.c \
 				get_planes.c \
 				get_spheres.c \
-				get_spots.c
+				get_spots.c \
+				hook.c \
+				draw_cone.c \
+				draw_cylinder.c \
+				draw_obj.c \
+				draw_plane.c \
+				draw_sphere.c
 MINILIBX	=	minilibx_macos/libmlx.a
 LIBFT		=	libft/libft.a
 GRAPHICS	=	graphics/graphics.a
@@ -47,22 +53,22 @@ all: mlx lib gra $(NAME)
 $(NAME): $(MINILIBX) $(LIBFT) $(GRAPHICS) $(BINDIR) $(OBJ)
 	@printf "\r$(GREEN)[$(PROJECT)] Bin compilation done.                                                        \n"
 	@printf "$(YELLOW)[$(PROJECT)] Compiling $(NAME)..."
-	@$(CC) $(CFLAGS) $(MLXF) -o $(NAME) $(OBJ) $(MINILIBX) $(LIBFT) $(GRAPHICS) -g
+	@$(CC) $(CFLAGS) $(MLXF) -o $(NAME) $(OBJ) $(MINILIBX) $(LIBFT) $(GRAPHICS) -g $(DEBUG)
 	@printf "\r$(GREEN)[$(PROJECT)] Compilation done.                          \n$(NO_COLOR)"
 
 $(BINDIR)%.o: $(SRCDIR)%.c
 	@printf "$(YELLOW)\r[$(PROJECT)] Compiling $< to $@ -g                                                          \r"
-	@$(CC) $(CFLAGS) -o $@ -c $<
+	@$(CC) $(CFLAGS) -o $@ -c $< $(DEBUG)
 
 mlx:
 	@printf "$(YELLOW)[MINILIBX] Compiling bin...                                                     \r$(NO_COLOR)"
-	@make -s -C minilibx_macos
+	@make -s -C minilibx_macos 2> /dev/null > /dev/null
 
 lib:
-	@make -s -C libft
+	@make -s -C libft 2> /dev/null > /dev/null
 
 gra:
-	@make -s -C graphics
+	@make -s -C graphics 2> /dev/null > /dev/null
 
 $(BINDIR):
 	@mkdir bin

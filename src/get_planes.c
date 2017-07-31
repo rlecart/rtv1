@@ -6,7 +6,7 @@
 /*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 03:48:22 by rlecart           #+#    #+#             */
-/*   Updated: 2017/07/13 03:36:27 by rlecart          ###   ########.fr       */
+/*   Updated: 2017/07/31 19:35:39 by rlecart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,25 @@ void	first_plane(t_rt *e, int *i)
 	(*i)++;
 }
 
+void	get_planes_values(t_rt *e, char **scene, int *i)
+{
+	if (scene[*i] && !(ft_strcmp(scene[++(*i)], "\tnew:")))
+		new_plane(e, i);
+	if (!(ft_strncmp(scene[*i], "\t\tpos:", 6)))
+		get_pos(&PLANES->pos, scene, *i);
+	if (!(ft_strncmp(scene[*i], "\t\tdist:", 7)))
+		get_radius(&PLANES->dist, scene, *i);
+	if (!(ft_strncmp(scene[*i], "\t\tcolor:", 8)))
+		get_col(&PLANES->color, scene, *i);
+}
+
 void	get_planes(t_rt *e, char **scene)
 {
 	int		i;
 
-	i = -1;
-	while (scene[++i])
+	i = 0;
+	while (scene[i])
+	{
 		if (scene[i][0] && scene[i][0] != '\t')
 		{
 			if (!(ft_strcmp(scene[i], "planes:"))
@@ -46,18 +59,12 @@ void	get_planes(t_rt *e, char **scene)
 			{
 				first_plane(e, &i);
 				while (scene[i] && scene[i][0] && scene[i][0] == '\t')
-				{
-					if (scene[i] && !(ft_strcmp(scene[++i], "\tnew:")))
-						new_plane(e, &i);
-					if (!(ft_strncmp(scene[i], "\t\tpos:", 6)))
-						get_pos(&PLANES->pos, scene, i);
-					if (!(ft_strncmp(scene[i], "\t\tdist:", 7)))
-						get_radius(&PLANES->dist, scene, i);
-					if (!(ft_strncmp(scene[i], "\t\tcolor:", 8)))
-						get_col(&PLANES->color, scene, i);
-				}
+					get_planes_values(e, scene, &i);
 			}
 		}
+		if (scene[i])
+			i++;
+	}
 	while (PLANES->before)
 		PLANES = PLANES->before;
 }

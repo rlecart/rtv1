@@ -6,7 +6,7 @@
 #    By: pbernier <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/21 03:19:16 by pbernier          #+#    #+#              #
-#    Updated: 2017/07/13 07:56:41 by rlecart          ###   ########.fr        #
+#    Updated: 2017/07/31 18:58:14 by rlecart          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -121,7 +121,7 @@ $(NAME): $(BINDIR) $(OBJ)
 
 $(BINDIR)%.o: $(SRCDIR)%.c
 	@printf "$(YELLOW)\r[$(PROJECT)] Compiling $< to $@                                                       \r"
-	@$(CC) $(CFLAGS) -o $@ -c $<
+	@$(CC) $(CFLAGS) -o $@ -c $< $(DEBUG)
 
 $(BINDIR):
 	@mkdir bin

@@ -6,7 +6,7 @@
 /*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/10 20:36:04 by rlecart           #+#    #+#             */
-/*   Updated: 2017/07/13 08:10:20 by rlecart          ###   ########.fr       */
+/*   Updated: 2017/07/31 20:28:36 by rlecart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,15 @@ typedef struct			s_rt
 {
 	void				*mlx;
 	void				*win;
+	void				*img;
+	char				*data;
 	t_camera			cam;
 	t_obj				obj;
 }						t_rt;
 
 void					init(t_rt *e, char *file);
+int						key_hook(int key, t_rt *e);
+
 void					get_camera(t_rt *e, char **scene);
 void					get_spheres(t_rt *e, char **scene);
 void					get_cylinders(t_rt *e, char **scene);
@@ -105,7 +109,11 @@ void					get_dir(float (*bdir)[3], char **scene, int i);
 void					get_col(float (*bcol)[4], char **scene, int i);
 void					get_radius(float *brad, char **scene, int i);
 
-void					stop_rt(t_rt *e);
+void					draw_obj(t_rt *e);
+void					draw_sphere(t_spheres *o);
+void					draw_cylinder(t_cylinders *o);
+void					draw_cone(t_cones *o);
+void					draw_plane(t_planes *o);
 
 void					print_debug(t_rt *e);
 

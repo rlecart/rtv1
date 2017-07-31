@@ -6,7 +6,7 @@
 /*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/10 20:36:32 by rlecart           #+#    #+#             */
-/*   Updated: 2017/07/13 08:10:33 by rlecart          ###   ########.fr       */
+/*   Updated: 2017/07/31 20:07:46 by rlecart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,16 +91,17 @@ void	print_debug(t_rt *e)
 			SPOTS = SPOTS->next;
 		}
 	}
-	while (SPHERES->before)
+	while (SPHERES && SPHERES->before)
 		SPHERES = SPHERES->before;
-	while (CYLINDERS->before)
+	while (CYLINDERS &&CYLINDERS->before)
 		CYLINDERS = CYLINDERS->before;
-	while (CONES->before)
+	while (CONES && CONES->before)
 		CONES = CONES->before;
-	while (PLANES->before)
+	while (PLANES && PLANES->before)
 		PLANES = PLANES->before;
-	while (SPOTS->before)
+	while (SPOTS && SPOTS->before)
 		SPOTS = SPOTS->before;
+	printf("\n");
 }
 
 int		main(int argc, char **argv)
@@ -110,6 +111,7 @@ int		main(int argc, char **argv)
 	if (argc == 2)
 	{
 		init(&e, argv[1]);
+		draw_obj(&e);
 		mlx_loop(e.mlx);
 	}
 	else
