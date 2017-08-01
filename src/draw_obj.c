@@ -6,7 +6,7 @@
 /*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/31 19:51:42 by rlecart           #+#    #+#             */
-/*   Updated: 2017/07/31 20:12:45 by rlecart          ###   ########.fr       */
+/*   Updated: 2017/08/01 02:26:33 by rlecart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	draw_obj_one(t_rt *e)
 {
 	while (SPHERES)
 	{
-		draw_sphere(SPHERES);
+		draw_sphere(e);
 		if (SPHERES->next)
 			SPHERES = SPHERES->next;
 		else
@@ -52,8 +52,30 @@ void	draw_obj_two(t_rt *e)
 	}
 }
 
+void	reset_img(t_rt *e)
+{
+	int			x;
+	int			y;
+	t_color		pix;
+
+	x = 0;
+	y = 0;
+	pix = get_color(0, 0, 0, 0);
+	while (y < WIN_H)
+	{
+		while (x < WIN_W)
+		{
+			pixel_put(e->data, x, y, pix);
+			x++;
+		}
+		x = 0;
+		y++;
+	}
+}
+
 void	draw_obj(t_rt *e)
 {
+	reset_img(e);
 	draw_obj_one(e);
 	draw_obj_two(e);
 	while (SPHERES && SPHERES->before)
@@ -66,4 +88,5 @@ void	draw_obj(t_rt *e)
 		PLANES = PLANES->before;
 	while (SPOTS && SPOTS->before)
 		SPOTS = SPOTS->before;
+	mlx_put_image_to_window(MLX, WIN, e->img, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 03:48:22 by rlecart           #+#    #+#             */
-/*   Updated: 2017/07/31 19:35:39 by rlecart          ###   ########.fr       */
+/*   Updated: 2017/08/01 01:25:12 by rlecart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,6 @@ void	get_planes(t_rt *e, char **scene)
 		if (scene[i])
 			i++;
 	}
-	while (PLANES->before)
+	while (PLANES && PLANES->before)
 		PLANES = PLANES->before;
 }

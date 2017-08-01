@@ -6,7 +6,7 @@
 /*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/10 20:36:04 by rlecart           #+#    #+#             */
-/*   Updated: 2017/07/31 20:28:36 by rlecart          ###   ########.fr       */
+/*   Updated: 2017/08/01 01:43:21 by rlecart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,13 @@ typedef struct			s_rt
 	t_obj				obj;
 }						t_rt;
 
+typedef struct			s_v3f
+{
+	float				x;
+	float				y;
+	float				z;
+}						t_v3f;
+
 void					init(t_rt *e, char *file);
 int						key_hook(int key, t_rt *e);
 
@@ -110,7 +117,7 @@ void					get_col(float (*bcol)[4], char **scene, int i);
 void					get_radius(float *brad, char **scene, int i);
 
 void					draw_obj(t_rt *e);
-void					draw_sphere(t_spheres *o);
+void					draw_sphere(t_rt *e);
 void					draw_cylinder(t_cylinders *o);
 void					draw_cone(t_cones *o);
 void					draw_plane(t_planes *o);

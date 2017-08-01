@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pixel.c                                            :+:      :+:    :+:   */
+/*   pixec                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 15:51:47 by rlecart           #+#    #+#             */
-/*   Updated: 2017/06/09 05:38:30 by rlecart          ###   ########.fr       */
+/*   Updated: 2017/08/01 02:05:02 by rlecart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <graphics.h>
 
-void	pixel_put(t_key *k, t_lk l)
+void	pixel_put(char *data, int x, int y, t_color pix)
 {
 	int		i;
 
 	i = 0;
-	if (l.x < WIN_W && l.y < WIN_H && l.x >= 0 && l.y >= 0)
+	if (x < WIN_W && y < WIN_H && x >= 0 && y >= 0)
 	{
-		i = (l.y - 1) * WIN_W + l.x;
-		((t_color*)k->img)[i] = k->pix;
+		i = y * WIN_W + x;
+		((t_color*)data)[i] = pix;
 	}
 }
