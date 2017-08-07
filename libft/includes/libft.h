@@ -6,7 +6,7 @@
 /*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 00:30:13 by rlecart           #+#    #+#             */
-/*   Updated: 2017/07/13 07:56:02 by rlecart          ###   ########.fr       */
+/*   Updated: 2017/08/05 13:05:20 by rlecart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,5 +134,6 @@ void				ft_uppercase(char **str);
 char				**ft_get_file(char *file);
 float				ft_atof(const char *str);
 char				**ft_strsplit_wc(char *str, char c);
+void				*ft_realloc(void *ptr, size_t size);
 
 #endif

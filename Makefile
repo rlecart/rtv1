@@ -6,7 +6,7 @@
 #    By: rlecart <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/29 00:43:30 by rlecart           #+#    #+#              #
-#    Updated: 2017/07/31 20:06:09 by rlecart          ###   ########.fr        #
+#    Updated: 2017/08/07 16:20:32 by rlecart          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,9 @@ SRC			=	main.c \
 				draw_cylinder.c \
 				draw_obj.c \
 				draw_plane.c \
-				draw_sphere.c
+				draw_sphere.c \
+				draw_spots.c \
+				get_delta_all.c
 MINILIBX	=	minilibx_macos/libmlx.a
 LIBFT		=	libft/libft.a
 GRAPHICS	=	graphics/graphics.a
@@ -36,7 +38,7 @@ OBJ			=	$(addprefix $(BINDIR),$(SRC:.c=.o))
 CC			=	gcc
 CFLAGS		=	-Wall -Werror -Wextra -I includes/ -I libft/includes/ -I graphics/includes/
 OPTI		=	-O2 -Ofast -O3
-DEBUG		=	-fsanitize=address -g
+DEBUG		=	-g
 MLXF		=	-framework OpenGL -framework AppKit
 
 WHITE		=	\033[7;49;39m

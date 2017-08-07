@@ -6,87 +6,80 @@
 /*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/31 19:51:42 by rlecart           #+#    #+#             */
-/*   Updated: 2017/08/01 02:26:33 by rlecart          ###   ########.fr       */
+/*   Updated: 2017/08/07 17:06:03 by rlecart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rtv1.h>
 
-void	draw_obj_one(t_rt *e)
+float	get_delta_all(t_rt *e, t_v3f vec, int *type, int *itype)
 {
-	while (SPHERES)
-	{
-		draw_sphere(e);
-		if (SPHERES->next)
-			SPHERES = SPHERES->next;
-		else
-			break ;
-	}
-	while (CYLINDERS)
-	{
-		draw_cylinder(CYLINDERS);
-		if (CYLINDERS->next)
-			CYLINDERS = CYLINDERS->next;
-		else
-			break ;
-	}
+	t_delta		d;
+
+	d.tmp = 0;
+	d.delta = -1;
+	d.type = type;
+	d.itype = itype;
+	get_delta_all_spheres(e, vec, &d);
+//	get_delta_all_cylinders(e, vec, &d);
+//	get_delta_all_cones(e, vec, &d);
+//	get_delta_all_planes(e, vec, &d);
+//	get_delta_all_spots(e, vec, &d);
+	return (d.delta);
 }
 
-void	draw_obj_two(t_rt *e)
+t_color		get_pix(t_rt *e, int type, int i)
 {
-	while (CONES)
-	{
-		draw_cone(CONES);
-		if (CONES->next)
-			CONES = CONES->next;
-		else
-			break ;
-	}
-	while (PLANES)
-	{
-		draw_plane(PLANES);
-		if (PLANES->next)
-			PLANES = PLANES->next;
-		else
-			break ;
-	}
+	t_color		pix;
+
+	pix = get_color(0, 0, 0, 0);
+	if (type == 1)
+		pix = get_color(SPHERES[i]->color[2], SPHERES[i]->color[1],
+				SPHERES[i]->color[0], SPHERES[i]->color[3]);
+	else if (type == 2)
+		pix = get_color(CYLINDERS[i]->color[2], CYLINDERS[i]->color[1],
+				CYLINDERS[i]->color[0], CYLINDERS[i]->color[3]);
+	else if (type == 3)
+		pix = get_color(CONES[i]->color[2], CONES[i]->color[1],
+				CONES[i]->color[0], CONES[i]->color[3]);
+	else if (type == 4)
+		pix = get_color(PLANES[i]->color[2], PLANES[i]->color[1],
+				PLANES[i]->color[0], PLANES[i]->color[3]);
+	else if (type == 5)
+		pix = get_color(SPOTS[i]->color[2], SPOTS[i]->color[1],
+				SPOTS[i]->color[0], SPOTS[i]->color[3]);
+	return (pix);
 }
 
-void	reset_img(t_rt *e)
+void	draw_obj(t_rt *e)
 {
 	int			x;
 	int			y;
-	t_color		pix;
+	int			type;
+	int			itype;
+	float		delta;
+	t_v3f		vec;
+	t_color		pix[2];
 
 	x = 0;
 	y = 0;
-	pix = get_color(0, 0, 0, 0);
+	type = 0;
+	itype = 0;
+	pix[0] = get_color(0, 0, 0, 0);
 	while (y < WIN_H)
 	{
 		while (x < WIN_W)
 		{
-			pixel_put(e->data, x, y, pix);
+			vec = get_vector(x, y, CAM.dir);
+			delta = get_delta_all(e, vec, &type, &itype);
+			pix[1] = get_pix(e, type, itype);
+			if (delta >= 0)
+				pixel_put(e->data, x, y, pix[1]);
 			x++;
 		}
 		x = 0;
 		y++;
 	}
-}
-
-void	draw_obj(t_rt *e)
-{
-	reset_img(e);
-	draw_obj_one(e);
-	draw_obj_two(e);
-	while (SPHERES && SPHERES->before)
-		SPHERES = SPHERES->before;
-	while (CYLINDERS &&CYLINDERS->before)
-		CYLINDERS = CYLINDERS->before;
-	while (CONES && CONES->before)
-		CONES = CONES->before;
-	while (PLANES && PLANES->before)
-		PLANES = PLANES->before;
-	while (SPOTS && SPOTS->before)
-		SPOTS = SPOTS->before;
 	mlx_put_image_to_window(MLX, WIN, e->img, 0, 0);
+	reset_img(e->data, WIN_W, WIN_H);
 }

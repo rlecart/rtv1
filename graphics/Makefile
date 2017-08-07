@@ -6,7 +6,7 @@
 #    By: rlecart <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/19 15:16:35 by rlecart           #+#    #+#              #
-#    Updated: 2017/08/01 02:05:26 by rlecart          ###   ########.fr        #
+#    Updated: 2017/08/02 19:06:41 by rlecart          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,9 @@ NAME		=	graphics.a
 BINDIR		=	bin/
 SRCDIR		=	src/
 SRC			=	color.c \
-				pixel.c
+				pixel.c \
+				vectors.c \
+				img.c
 OBJ			=	$(addprefix $(BINDIR),$(SRC:.c=.o))
 CC			=	gcc
 CFLAGS		=	-Wall -Werror -Wextra -I includes/ -O2 -Ofast

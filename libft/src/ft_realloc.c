@@ -1,21 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_cylinder.c                                    :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/31 20:03:59 by rlecart           #+#    #+#             */
-/*   Updated: 2017/08/07 16:17:45 by rlecart          ###   ########.fr       */
+/*   Created: 2017/08/05 12:58:01 by rlecart           #+#    #+#             */
+/*   Updated: 2017/08/05 13:31:06 by rlecart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <rtv1.h>
+#include <libft.h>
 
-float	get_delta_cylinder(float pos[3], t_v3f vec, float radius)
+void	*ft_realloc(void *ptr, size_t size)
 {
-	pos[0] += 0;
-	vec.x += 0;
-	radius += 0;
-	return (1000000000);
+	char	*newptr;
+
+	if (!size && ptr)
+	{
+		if (!(newptr = malloc(1)))
+			return (NULL);
+		ft_memdel(&ptr);
+		return (newptr);
+	}
+	if (!(newptr = malloc(size)))
+		return (NULL);
+	ft_memset(newptr, 0, size);
+	if (ptr)
+	{
+		ft_memcpy(newptr, ptr, size);
+		ft_memdel(&ptr);
+	}
+	return (newptr);
 }

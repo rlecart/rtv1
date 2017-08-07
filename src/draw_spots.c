@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_cylinder.c                                    :+:      :+:    :+:   */
+/*   draw_spots.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/31 20:03:59 by rlecart           #+#    #+#             */
-/*   Updated: 2017/08/07 16:17:45 by rlecart          ###   ########.fr       */
+/*   Created: 2017/08/07 16:19:15 by rlecart           #+#    #+#             */
+/*   Updated: 2017/08/07 16:19:17 by rlecart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rtv1.h>
 
-float	get_delta_cylinder(float pos[3], t_v3f vec, float radius)
+float	get_delta_spot(float pos[3], t_v3f vec, float radius)
 {
 	pos[0] += 0;
 	vec.x += 0;

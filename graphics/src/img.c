@@ -1,21 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_cylinder.c                                    :+:      :+:    :+:   */
+/*   img.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/31 20:03:59 by rlecart           #+#    #+#             */
-/*   Updated: 2017/08/07 16:17:45 by rlecart          ###   ########.fr       */
+/*   Created: 2017/08/02 19:00:44 by rlecart           #+#    #+#             */
+/*   Updated: 2017/08/02 19:06:16 by rlecart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <rtv1.h>
+#include <graphics.h>
 
-float	get_delta_cylinder(float pos[3], t_v3f vec, float radius)
+void	reset_img(char *data, int x_max, int y_max)
 {
-	pos[0] += 0;
-	vec.x += 0;
-	radius += 0;
-	return (1000000000);
+	int			x;
+	int			y;
+	t_color		pix;
+
+	x = 0;
+	y = 0;
+	pix = get_color(0, 0, 0, 0);
+	while (y < y_max)
+	{
+		while (x < x_max)
+		{
+			pixel_put(data, x, y, pix);
+			x++;
+		}
+		x = 0;
+		y++;
+	}
 }

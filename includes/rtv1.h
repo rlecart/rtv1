@@ -6,7 +6,7 @@
 /*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/10 20:36:04 by rlecart           #+#    #+#             */
-/*   Updated: 2017/08/01 01:43:21 by rlecart          ###   ########.fr       */
+/*   Updated: 2017/08/07 16:29:03 by rlecart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,20 @@
 # define PLANES e->obj.planes
 # define SPOTS e->obj.spots
 
+typedef struct		s_delta
+{
+	float			tmp;
+	float			delta;
+	float			dis[3];
+	int				*type;
+	int				*itype;
+}					t_delta;
+
 typedef struct		s_spheres
 {
 	float				pos[3];
 	float				radius;
 	float				color[4];
-	struct s_spheres	*before;
-	struct s_spheres	*next;
 }						t_spheres;
 
 typedef struct			s_cylinders
@@ -39,8 +46,6 @@ typedef struct			s_cylinders
 	float				pos[3];
 	float				radius;
 	float				color[4];
-	struct s_cylinders	*before;
-	struct s_cylinders	*next;
 }						t_cylinders;
 
 typedef struct			s_cones
@@ -48,8 +53,6 @@ typedef struct			s_cones
 	float				pos[3];
 	float				radius;
 	float				color[4];
-	struct s_cones		*before;
-	struct s_cones		*next;
 }						t_cones;
 
 typedef struct			s_planes
@@ -57,25 +60,22 @@ typedef struct			s_planes
 	float				pos[3];
 	float				dist;
 	float				color[4];
-	struct s_planes		*before;
-	struct s_planes		*next;
 }						t_planes;
 
 typedef struct			s_spots
 {
 	float				pos[3];
+	float				dir[3];
 	float				color[4];
-	struct s_spots		*before;
-	struct s_spots		*next;
 }						t_spots;
 
 typedef struct			s_obj
 {
-	t_spheres			*spheres;
-	t_cylinders			*cylinders;
-	t_cones				*cones;
-	t_planes			*planes;
-	t_spots				*spots;
+	t_spheres			**spheres;
+	t_cylinders			**cylinders;
+	t_cones				**cones;
+	t_planes			**planes;
+	t_spots				**spots;
 }						t_obj;
 
 typedef struct			s_camera
@@ -94,13 +94,6 @@ typedef struct			s_rt
 	t_obj				obj;
 }						t_rt;
 
-typedef struct			s_v3f
-{
-	float				x;
-	float				y;
-	float				z;
-}						t_v3f;
-
 void					init(t_rt *e, char *file);
 int						key_hook(int key, t_rt *e);
 
@@ -116,11 +109,19 @@ void					get_dir(float (*bdir)[3], char **scene, int i);
 void					get_col(float (*bcol)[4], char **scene, int i);
 void					get_radius(float *brad, char **scene, int i);
 
+float					get_delta_sphere(float pos[3], t_v3f vec, float radius);
+float					get_delta_cylinder(float pos[3], t_v3f vec, float radius);
+float					get_delta_cone(float pos[3], t_v3f vec, float radius);
+float					get_delta_plane(float pos[3], t_v3f vec, float distance);
+float					get_delta_spot(float pos[3], t_v3f vec, float radius);
+
+void					get_delta_all_spheres(t_rt *e, t_v3f vec, t_delta *d);
+void					get_delta_all_cylinders(t_rt *e, t_v3f vec, t_delta *d);
+void					get_delta_all_cones(t_rt *e, t_v3f vec, t_delta *d);
+void					get_delta_all_planes(t_rt *e, t_v3f vec, t_delta *d);
+void					get_delta_all_spots(t_rt *e, t_v3f vec, t_delta *d);
+
 void					draw_obj(t_rt *e);
-void					draw_sphere(t_rt *e);
-void					draw_cylinder(t_cylinders *o);
-void					draw_cone(t_cones *o);
-void					draw_plane(t_planes *o);
 
 void					print_debug(t_rt *e);
 
