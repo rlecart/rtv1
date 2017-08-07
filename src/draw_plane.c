@@ -6,7 +6,7 @@
 /*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/31 20:04:28 by rlecart           #+#    #+#             */
-/*   Updated: 2017/08/07 16:17:18 by rlecart          ###   ########.fr       */
+/*   Updated: 2017/08/07 19:17:38 by rlecart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,19 @@
 // A * vec.x + B * vec.y + C * vec.z + distance = 0;
 //
 
+float	get_delta_plane(float pos[3], t_v3f vec, float distance)
+{
+	float	t;
+
+	if (vec.z < 0.000001 && vec.z > -0.000001)
+		t = -1;
+	else
+		t = -(pos[2] / vec.z);
+	distance += 0;
+	return (t);
+}
+
+/*
 float	get_delta_plane(float pos[3], t_v3f vec, float distance)
 {
 	float	calc;
@@ -48,3 +61,4 @@ float	get_delta_plane(float pos[3], t_v3f vec, float distance)
 			return (1);
 	return (-1);
 }
+*/

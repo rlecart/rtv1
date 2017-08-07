@@ -14,3 +14,8 @@ spheres:
 		pos: -3, 1, 0
 		radius: 0.5
 		color: 255, 144, 0, 0
+planes:
+	new:
+		pos: 0, 0, 1
+		dist: 1
+		color: 255, 255, 255, 0

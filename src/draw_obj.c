@@ -6,7 +6,7 @@
 /*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/31 19:51:42 by rlecart           #+#    #+#             */
-/*   Updated: 2017/08/07 17:06:03 by rlecart          ###   ########.fr       */
+/*   Updated: 2017/08/07 19:00:03 by rlecart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,16 @@ float	get_delta_all(t_rt *e, t_v3f vec, int *type, int *itype)
 	d.delta = -1;
 	d.type = type;
 	d.itype = itype;
-	get_delta_all_spheres(e, vec, &d);
-//	get_delta_all_cylinders(e, vec, &d);
-//	get_delta_all_cones(e, vec, &d);
-//	get_delta_all_planes(e, vec, &d);
-//	get_delta_all_spots(e, vec, &d);
+	if (SPHERES)
+		get_delta_all_spheres(e, vec, &d);
+	if (CYLINDERS)
+		get_delta_all_cylinders(e, vec, &d);
+	if (CONES)
+		get_delta_all_cones(e, vec, &d);
+	if (PLANES)
+		get_delta_all_planes(e, vec, &d);
+	if (SPOTS)
+		get_delta_all_spots(e, vec, &d);
 	return (d.delta);
 }
 

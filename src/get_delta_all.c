@@ -6,7 +6,7 @@
 /*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/07 16:03:59 by rlecart           #+#    #+#             */
-/*   Updated: 2017/08/07 17:09:10 by rlecart          ###   ########.fr       */
+/*   Updated: 2017/08/07 19:31:52 by rlecart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	get_delta_all_cylinders(t_rt *e, t_v3f vec, t_delta *d)
 		if (d->tmp < d->delta)
 		{
 			d->delta = d->tmp;
-			*d->type = 1;
+			*d->type = 2;
 			*d->itype = i;
 		}
 		i++;
@@ -68,7 +68,7 @@ void	get_delta_all_cones(t_rt *e, t_v3f vec, t_delta *d)
 		if (d->tmp < d->delta)
 		{
 			d->delta = d->tmp;
-			*d->type = 1;
+			*d->type = 3;
 			*d->itype = i;
 		}
 		i++;
@@ -85,11 +85,14 @@ void	get_delta_all_planes(t_rt *e, t_v3f vec, t_delta *d)
 		ft_memset(d->dis, 0, sizeof(d->dis));
 		add_3f(&d->dis, &PLANES[i]->pos, &CAM.pos);
 		d->tmp = get_delta_plane(d->dis, vec, PLANES[i]->dist);
-		if (d->tmp < d->delta)
+		if (d->delta == -1 || (d->tmp < d->delta))
 		{
-			d->delta = d->tmp;
-			*d->type = 1;
-			*d->itype = i;
+			if (d->tmp != -1)
+			{
+				d->delta = d->tmp;
+				*d->type = 4;
+				*d->itype = i;
+			}
 		}
 		i++;
 	}
