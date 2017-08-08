@@ -6,7 +6,7 @@
 /*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/31 19:51:42 by rlecart           #+#    #+#             */
-/*   Updated: 2017/08/07 19:00:03 by rlecart          ###   ########.fr       */
+/*   Updated: 2017/08/08 14:30:04 by rlecart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ float	get_delta_all(t_rt *e, t_v3f vec, int *type, int *itype)
 {
 	t_delta		d;
 
-	d.tmp = 0;
+	d.tmp = -1;
 	d.delta = -1;
 	d.type = type;
 	d.itype = itype;
@@ -77,9 +77,11 @@ void	draw_obj(t_rt *e)
 		{
 			vec = get_vector(x, y, CAM.dir);
 			delta = get_delta_all(e, vec, &type, &itype);
-			pix[1] = get_pix(e, type, itype);
 			if (delta >= 0)
+			{
+				pix[1] = get_pix(e, type, itype);
 				pixel_put(e->data, x, y, pix[1]);
+			}
 			x++;
 		}
 		x = 0;

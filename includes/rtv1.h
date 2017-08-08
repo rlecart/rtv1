@@ -6,7 +6,7 @@
 /*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/10 20:36:04 by rlecart           #+#    #+#             */
-/*   Updated: 2017/08/07 19:01:04 by rlecart          ###   ########.fr       */
+/*   Updated: 2017/08/08 12:38:53 by rlecart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void					get_radius(float *brad, char **scene, int i);
 float					get_delta_sphere(float pos[3], t_v3f vec, float radius);
 float					get_delta_cylinder(float pos[3], t_v3f vec, float radius);
 float					get_delta_cone(float pos[3], t_v3f vec, float radius);
-float					get_delta_plane(float pos[3], t_v3f vec, float distance);
+float					get_delta_plane(float pos[3], t_v3f vec, float distance, t_rt *e);
 float					get_delta_spot(float pos[3], t_v3f vec, float radius);
 
 void					get_delta_all_spheres(t_rt *e, t_v3f vec, t_delta *d);

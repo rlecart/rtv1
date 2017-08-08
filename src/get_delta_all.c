@@ -6,7 +6,7 @@
 /*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/07 16:03:59 by rlecart           #+#    #+#             */
-/*   Updated: 2017/08/07 19:31:52 by rlecart          ###   ########.fr       */
+/*   Updated: 2017/08/08 14:30:58 by rlecart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	get_delta_all_planes(t_rt *e, t_v3f vec, t_delta *d)
 	{
 		ft_memset(d->dis, 0, sizeof(d->dis));
 		add_3f(&d->dis, &PLANES[i]->pos, &CAM.pos);
-		d->tmp = get_delta_plane(d->dis, vec, PLANES[i]->dist);
+		d->tmp = get_delta_plane(d->dis, vec, PLANES[i]->dist, e);
 		if (d->delta == -1 || (d->tmp < d->delta))
 		{
 			if (d->tmp != -1)
