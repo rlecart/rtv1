@@ -6,7 +6,7 @@
 /*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/31 20:04:28 by rlecart           #+#    #+#             */
-/*   Updated: 2017/08/08 14:34:15 by rlecart          ###   ########.fr       */
+/*   Updated: 2017/08/08 16:10:13 by rlecart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,9 @@ t_v3f	vec3_normalize(t_v3f a)
 	return (result);
 }
 
-float	dot_product(t_v3f vec1, t_v3f vec2)
+float	dot_product(t_v3f v1, t_v3f v2)
 {
-	int		i;
-	float	result;
-
-	i = 0;
-	result = 0;
-	result += vec1.x * vec2.x;
-	result += vec1.y * vec2.y;
-	result += vec1.z * vec2.z;
-	return (result);
+	return ((float)((v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z)));
 }
 
 t_v3f	dot_min(t_v3f vec1, t_v3f vec2)
@@ -95,20 +87,19 @@ float	get_delta_plane(float pos[3], t_v3f vec, float distance, t_rt *e)
 
 	distance += 0;
 	n.x = 0;
-	n.y = 1;
-	n.z = 0;
+	n.y = 0;
+	n.z = 1;
 	d = dot_product(n, vec);
 	//n = vec3_normalize(vec);
 	//result = -((pos[0] * n.x + pos[1] * n.y + pos[2] * n.z + distance) / (pos[0] * vec.x + pos[1] * vec.y + pos[2] * vec.z));
 	//result = -(n.x * pos[0] + n.y * pos[1] + n.z * pos[2] + distance);
-	if (fabs(d) > 0.0001)
+	if (fabs(d) < 0.0001)
 	{
 		dist = dot_min(ftov(pos), ftov(CAM.pos));
 		result = dot_product(dist, n) / d;
 		return (result);
 	}
-	else
-		return (-1);
+	return (0);
 }
 
 

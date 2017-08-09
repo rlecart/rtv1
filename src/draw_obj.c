@@ -6,7 +6,7 @@
 /*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/31 19:51:42 by rlecart           #+#    #+#             */
-/*   Updated: 2017/08/08 14:30:04 by rlecart          ###   ########.fr       */
+/*   Updated: 2017/08/08 16:15:17 by rlecart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ float	get_delta_all(t_rt *e, t_v3f vec, int *type, int *itype)
 {
 	t_delta		d;
 
-	d.tmp = -1;
+	d.tmp = 0;
 	d.delta = -1;
 	d.type = type;
 	d.itype = itype;

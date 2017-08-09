@@ -16,6 +16,6 @@ spheres:
 		color: 255, 144, 0, 0
 planes:
 	new:
-		pos: 0, 0, 1
+		pos: 0, 0, 100
 		dist: 0
 		color: 255, 255, 255, 0
