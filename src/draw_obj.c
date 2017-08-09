@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_obj.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ocojeda- <ocojeda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/31 19:51:42 by rlecart           #+#    #+#             */
-/*   Updated: 2017/08/07 19:00:03 by rlecart          ###   ########.fr       */
+/*   Updated: 2017/08/10 01:45:41 by ocojeda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,26 @@ t_color		get_pix(t_rt *e, int type, int i)
 	return (pix);
 }
 
+t_vec3	create_vector(float x, float y, float z)
+{
+	t_vec3	nvector;
+
+	nvector.x = x;
+	nvector.y = y;
+	nvector.z = z;
+	return (nvector);
+}
+
+
+t_ray	create_ray(t_vec3 origin, t_vec3 direction)
+{
+	t_ray	ray;
+	
+	ray.origin = origin;
+	ray.direction = direction;
+	return (ray);
+}
+
 void	draw_obj(t_rt *e)
 {
 	int			x;
@@ -63,8 +83,9 @@ void	draw_obj(t_rt *e)
 	int			type;
 	int			itype;
 	float		delta;
-	t_v3f		vec;
+	t_v3f		direction;
 	t_color		pix[2];
+	t_ray		ray;
 
 	x = 0;
 	y = 0;
@@ -75,8 +96,13 @@ void	draw_obj(t_rt *e)
 	{
 		while (x < WIN_W)
 		{
-			vec = get_vector(x, y, CAM.dir);
-			delta = get_delta_all(e, vec, &type, &itype);
+			direction = get_vector(x, y, CAM.dir);
+			/*jessai dajouter un ray avec 2 vecteurs, 
+			un pour l'origin et un  pour la direction */
+			ray = create_ray(create_vector(CAM.pos[0], CAM.pos[1], CAM.pos[2]),
+				create_vector(direction.x, direction.y, direction.z));
+			
+			delta = get_delta_all(e, direction, &type, &itype);
 			pix[1] = get_pix(e, type, itype);
 			if (delta >= 0)
 				pixel_put(e->data, x, y, pix[1]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlecart <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ocojeda- <ocojeda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/10 20:36:04 by rlecart           #+#    #+#             */
-/*   Updated: 2017/08/07 19:01:04 by rlecart          ###   ########.fr       */
+/*   Updated: 2017/08/10 01:19:44 by ocojeda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <../libft/includes/libft.h>
 # include <../graphics/includes/graphics.h>
+# include <../libvec/libvec.h>
 
 # define MLX e->mlx
 # define WIN e->win
@@ -24,6 +25,12 @@
 # define CONES  e->obj.cones
 # define PLANES e->obj.planes
 # define SPOTS e->obj.spots
+
+typedef	struct		s_ray
+{
+	t_vec3			origin;
+	t_vec3			direction;
+}					t_ray;
 
 typedef struct		s_delta
 {

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rlecart <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: ocojeda- <ocojeda-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/29 00:43:30 by rlecart           #+#    #+#              #
-#    Updated: 2017/08/07 16:20:32 by rlecart          ###   ########.fr        #
+#    Updated: 2017/08/10 00:18:58 by ocojeda-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,10 +33,11 @@ SRC			=	main.c \
 				get_delta_all.c
 MINILIBX	=	minilibx_macos/libmlx.a
 LIBFT		=	libft/libft.a
+LIBVEC		=	libvec/libvec.a
 GRAPHICS	=	graphics/graphics.a
 OBJ			=	$(addprefix $(BINDIR),$(SRC:.c=.o))
 CC			=	gcc
-CFLAGS		=	-Wall -Werror -Wextra -I includes/ -I libft/includes/ -I graphics/includes/
+CFLAGS		=	-Wall -Werror -Wextra -I includes/ -I libft/includes/ -I libvec/ -I graphics/includes/
 OPTI		=	-O2 -Ofast -O3
 DEBUG		=	-g
 MLXF		=	-framework OpenGL -framework AppKit
@@ -52,10 +53,10 @@ NO_COLOR	=	\033[m
 
 all: mlx lib gra $(NAME)
 
-$(NAME): $(MINILIBX) $(LIBFT) $(GRAPHICS) $(BINDIR) $(OBJ)
+$(NAME): $(MINILIBX) $(LIBFT) $(LIBVEC) $(GRAPHICS) $(BINDIR) $(OBJ)
 	@printf "\r$(GREEN)[$(PROJECT)] Bin compilation done.                                                        \n"
 	@printf "$(YELLOW)[$(PROJECT)] Compiling $(NAME)..."
-	@$(CC) $(CFLAGS) $(MLXF) -o $(NAME) $(OBJ) $(MINILIBX) $(LIBFT) $(GRAPHICS) -g $(DEBUG)
+	@$(CC) $(CFLAGS) $(MLXF) -o $(NAME) $(OBJ) $(MINILIBX) $(LIBFT) $(LIBVEC) $(GRAPHICS) -g $(DEBUG)
 	@printf "\r$(GREEN)[$(PROJECT)] Compilation done.                          \n$(NO_COLOR)"
 
 $(BINDIR)%.o: $(SRCDIR)%.c
@@ -68,6 +69,7 @@ mlx:
 
 lib:
 	@make -s -C libft 2> /dev/null > /dev/null
+	@make -s -C libvec 2> /dev/null > /dev/null
 
 gra:
 	@make -s -C graphics 2> /dev/null > /dev/null
@@ -77,6 +79,7 @@ $(BINDIR):
 
 clean:
 	@make -s -C libft clean
+	@make -s -C libvec clean
 	@make -s -C graphics clean
 	@printf "$(YELLOW)[$(PROJECT)] Removing bin..."
 	@rm -rf $(OBJ)
@@ -86,6 +89,7 @@ clean:
 fclean:
 	@make -s -C minilibx_macos clean
 	@make -s -C libft fclean
+	@make -s -C libvec fclean
 	@make -s -C graphics fclean
 	@printf "$(YELLOW)[$(PROJECT)] Removing bin..."
 	@rm -rf $(OBJ)
