@@ -6,7 +6,7 @@
 /*   By: tfaure <tfaure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 14:37:39 by tfaure            #+#    #+#             */
-/*   Updated: 2017/08/10 06:55:32 by mhalit           ###   ########.fr       */
+/*   Updated: 2017/08/14 13:55:11 by tfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,11 +150,11 @@ void			super_sampler(t_rt *e);
 void			anti_supersampler(t_rt *e);
 double			intersect_sphere(t_ray ray, t_obj sphere);
 int				key_hook(int keycode, t_rt *e);
-t_color			*color_mult(t_color color, double taux);
+t_color			color_mult(t_color color, double taux);
 double			get_length(t_vec3d v);
 double			intersect_plane(t_ray ray, t_obj sphere);
 double			intersect_cylinder(t_ray ray, t_obj cylinder);
-t_color			*copy_color(t_color color);
+t_color			copy_color(t_color color);
 double			intersect_cone(t_ray ray, t_obj cone);
 double			intensity_cone(t_rt *e, t_vec3d poi,
 					t_obj cone, t_light light);

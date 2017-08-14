@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytrace.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ocojeda- <ocojeda-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfaure <tfaure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 16:26:32 by tfaure            #+#    #+#             */
-/*   Updated: 2017/08/14 11:30:28 by ocojeda-         ###   ########.fr       */
+/*   Updated: 2017/08/14 13:56:09 by tfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int				obj_in_shadow(t_rt *e, t_vec3 poi, t_light light)
 		return (0);
 }
 
-t_color			*get_color(t_rt *e, t_obj obj, t_vec3 poi)
+t_color			get_color(t_rt *e, t_obj obj, t_vec3 poi)
 {
 	float		intensity;
 	int 		i;
@@ -52,7 +52,7 @@ t_color			*get_color(t_rt *e, t_obj obj, t_vec3 poi)
 	if (i <= e->scene.nbr_obj && intensity >= 0) 
 		return (color_mult(obj.color, intensity));
 	else 
-		return (NULL);
+		return (c_color(0,0,0));
 }
 /*
  ** We test all the object to get the minimal z coordinate of point_of_impact
@@ -90,14 +90,14 @@ float			get_min_dist(t_rt *e, t_ray ray, int cangoneg)
  ** and send it to the compute method to return a color
  */
 
-static t_color	*get_pxl_color(t_rt *e, t_ray ray, t_color *color)
+static t_color	get_pxl_color(t_rt *e, t_ray ray, t_color color)
 {
 	float		min_dist;
 	t_vec3		point_of_impact;
 	
 	e->scene.id = -1;
 	if ((min_dist = get_min_dist(e, ray, 0)) == -1)
-		return (NULL);
+		return (c_color(0, 0, 0));
 	point_of_impact = vec_add3(ray.pos,
 			vec_scale3(ray.dir, min_dist));
 	if (e->scene.id != -1)
@@ -114,9 +114,9 @@ int				raytrace(int x, int y, t_rt *env)
 {
 	t_ray		ray;
 	t_vec3		pov;
-	t_color		*color;
+	t_color		color;
 
-	color = NULL;
+	color = c_color(0,0,0);
 
 	//unsigned int *img_temp;
 	//img_temp = (unsigned int *)semalloc(sizeof(unsigned int) * (LARGEUR * HAUTEUR));
@@ -125,10 +125,9 @@ int				raytrace(int x, int y, t_rt *env)
 		(float)(y + env->scene.cam.ray.pos.y) / SS, 1);
 	ray = c_ray(pov, vec_new3(0, 0, 1));
 	color = get_pxl_color(env, ray, color);
-	if (color != NULL)
-	{
-		mlx_pixel(x, y, env, ret_colors(*color));
-		free(color);
-	}
+	//if (color.r != 0 && color.g != 0 && color.b != 0)
+	//{
+		mlx_pixel(x, y, env, ret_colors(color));
+	//}
 	return (1);
 }
