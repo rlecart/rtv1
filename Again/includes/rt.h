@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfaure <tfaure@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ocojeda- <ocojeda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/01 12:28:36 by mhalit            #+#    #+#             */
-/*   Updated: 2017/08/14 13:54:44 by tfaure           ###   ########.fr       */
+/*   Updated: 2017/08/15 15:54:07 by ocojeda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,12 @@
 # define CYAN		6
 # define WHITE		7
 
+# define DEFAULT_SUPERSAMPLING 0
+# define SS (env->scene.supersampling + 1)
+
 # define INIT env->mlx.init
 # define WIN env->mlx.window
 # define IMG env->mlx.image
-# define SS (env->scene.supersampling + 1)
 # define HAUTEUR env->file.haut * SS
 # define LARGEUR env->file.larg
 # define SFILE env->file.path
@@ -72,7 +74,6 @@
 # define MAXOBJ 21
 # define MAXLIGHT 21
 
-# define DEFAULT_SUPERSAMPLING 0
 # define FOV 30
 # define KEY_ESC 53
 # define DIST_MAX 20000

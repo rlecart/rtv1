@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfaure <tfaure@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ocojeda- <ocojeda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 14:37:39 by tfaure            #+#    #+#             */
-/*   Updated: 2017/08/14 13:55:11 by tfaure           ###   ########.fr       */
+/*   Updated: 2017/08/15 15:37:05 by ocojeda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #ifndef RTV1_H
 # define RTV1_H
-
+/*
 # include "libft.h"
 # include "libvec.h"
 # include <math.h>
@@ -21,14 +21,14 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
-
+*/
 /*
 ** if we want to switch on or off supersampler we need to change
 ** SS value. 1 for off, 2 for on.
 */
 
-# define DEFAULT_SUPERSAMPLING 0
-# define SS (e->scene.supersampling + 1)
+
+/*
 # define W 1500 * SS
 # define H 800 * SS
 # define FOV 30
@@ -36,15 +36,15 @@
 # define DIST_MAX 20000
 # define DIST_MIN -80000
 # define AMBIENT_LIGHT 50
-
+*/
 /*
 ** Compute the average color between two 24-bits RGB colors
 ** https://www.compuphase.com/graphic/scale3.htm
 */
-# define AVERAGE(a, b)   ( ((((a) ^ (b)) & 0xfffefefeL) >> 1) + ((a) & (b)) )
+//# define AVERAGE(a, b)   ( ((((a) ^ (b)) & 0xfffefefeL) >> 1) + ((a) & (b)) )
 
 //# define AVERAGE(a, b)   ( ((((a) ^ (b)) & 0xfffefefeL) >> 1) + ((a) + (b)) ) //effect bizarre
-
+/*
 enum	e_type
 {
 	PLANE = 2,
@@ -82,14 +82,14 @@ typedef struct	s_ray
 	t_vec3d		pos;
 	t_vec3d		dir;
 }				t_ray;
-
+*/
 // typedef struct		s_light
 // {
 // 	double			intensity;
 // 	t_vec3d			origin;
 // 	struct s_light	*next;
 // }					t_light;
-
+/*
 typedef struct		s_light
 {
 	int				is_init;
@@ -167,11 +167,11 @@ double			intensity_cylinder(t_rt *e, t_vec3d poi,
 double			get_min_dist(t_rt *e, t_ray ray, t_obj **closest, int cangoneg);
 int				obj_in_shadow(t_rt *e, t_vec3d poi, t_light light);
 double			get_res_of_quadratic(double a, double b, double c);
-
+*/
 /*
 ** Parser
 */
-
+/*
 t_rt			*parse(char *scene);
 void			syntax_error(char *line, char *explain, int nbline);
 void			unknown_setting(char *line, int nbline);
@@ -191,5 +191,5 @@ t_color			set_color(t_rt *e, char *arg);
 void			unknown_option(char *line, int nbline, char *caller);
 void			set_first_obj(t_rt *e, t_obj *obj);
 void			set_first_light(t_rt *e, t_light *light);
-
+*/
 #endif

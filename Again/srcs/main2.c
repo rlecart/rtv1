@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhalit <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ocojeda- <ocojeda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/03 00:09:53 by mhalit            #+#    #+#             */
-/*   Updated: 2017/08/10 07:48:37 by mhalit           ###   ########.fr       */
+/*   Updated: 2017/08/15 16:00:00 by ocojeda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,16 @@ int		main(int argc, char **argv)
 		init_rt(env);
 		if (!parse_args(argv, argc, env))
 			return (0);
-		env->mlx.window = mlx_new_window(env->mlx.init, env->file.larg, env->file.haut, "RT Again");
+		if (DEFAULT_SUPERSAMPLING == 1)
+		{
+			env->scene.supersampling = 1;
+			printf("%i\n", env->scene.supersampling);
+		}
+		env->mlx.window = mlx_new_window(env->mlx.init, env->file.larg, env->file.haut, "RT Again");	
 		
 		frame(env);
-		// if (env->scene.supersampling)
-		// 	super_sampler(env);
+		//if (env->scene.supersampling)
+		//super_sampler(env);
 		// else
 		// 	anti_supersampler(env);
 		mlx_key_hook(env->mlx.window, key_hook, env);
