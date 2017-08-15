@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frame.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhalit <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ocojeda- <ocojeda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/07 05:21:15 by mhalit            #+#    #+#             */
-/*   Updated: 2017/08/10 06:57:45 by mhalit           ###   ########.fr       */
+/*   Updated: 2017/08/15 19:04:04 by ocojeda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,12 @@ void	mlx_pixel(int x, int y, t_rt *env, int color)
 
 void	frame(t_rt *env)
 {
-	int x;
-	int y;
-
-	y = 0;
 	IMG = mlx_new_image(INIT, LARGEUR, HAUTEUR);
-	env->mlx.data = mlx_get_data_addr(IMG, &env->mlx.bpp, &env->mlx.size_l, &env->mlx.endian);
-	while (y < HAUTEUR)
-	{
-		x = 0;
-		while (x < LARGEUR)
-		{
-			raytrace(x, y, env);
-			x++;
-		}
-		y++;
-	}
+	env->mlx.data = mlx_get_data_addr(IMG, &env->mlx.bpp, 
+	&env->mlx.size_l, &env->mlx.endian);
+	if (SS == 1)
+		anti_aliasing_on(env);
+	else
+		anti_aliasing_on(env);
 	mlx_put_image_to_window(INIT, WIN, IMG, 0, 0);
 }

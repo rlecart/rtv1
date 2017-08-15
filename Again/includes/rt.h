@@ -6,7 +6,7 @@
 /*   By: ocojeda- <ocojeda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/01 12:28:36 by mhalit            #+#    #+#             */
-/*   Updated: 2017/08/15 15:54:07 by ocojeda-         ###   ########.fr       */
+/*   Updated: 2017/08/15 19:24:26 by ocojeda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,18 @@
 # define CYAN		6
 # define WHITE		7
 
-# define DEFAULT_SUPERSAMPLING 0
-# define SS (env->scene.supersampling + 1)
+/*
+*	to turn on and off the supersample u need to switch DEFULT_SUPER
+* form 1 to 0; on and off.
+*/
+
+# define DEFAULT_SUPERSAMPLING 1
+# define SS (env->scene.supersampling)
 
 # define INIT env->mlx.init
 # define WIN env->mlx.window
 # define IMG env->mlx.image
-# define HAUTEUR env->file.haut * SS
+# define HAUTEUR env->file.haut
 # define LARGEUR env->file.larg
 # define SFILE env->file.path
 # define POS env->scene.cam.ray.pos
@@ -73,6 +78,9 @@
 # define ABS(x) (x < 0 ? -x : x)
 # define MAXOBJ 21
 # define MAXLIGHT 21
+
+# define W LARGEUR * SS
+# define H HAUTEUR * SS
 
 # define FOV 30
 # define KEY_ESC 53
@@ -216,9 +224,12 @@ void				mlx_pixel(int x, int y, t_rt *env, int color);
 
 unsigned int	ret_colors(t_color color);
 t_ray			c_ray(t_vec3 i, t_vec3 j);
-int				raytrace(int x, int y, t_rt *e);
+t_color			raytrace(int x, int y, t_rt *e);
 void			super_sampler(t_rt *env);
 void			anti_supersampler(t_rt *env);
+//erase super_sampler() and anti_supersampler(), no need anymore
+void			anti_aliasing_on(t_rt *env);
+void			anti_aliasing_off(t_rt *env);
 float			intersect_sphere(t_ray ray, t_obj sphere);
 int				key_hook(int keycode, t_rt *e);
 t_color			color_mult(t_color color, float taux);

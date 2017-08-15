@@ -6,7 +6,7 @@
 /*   By: ocojeda- <ocojeda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/03 00:09:53 by mhalit            #+#    #+#             */
-/*   Updated: 2017/08/15 16:00:00 by ocojeda-         ###   ########.fr       */
+/*   Updated: 2017/08/15 18:22:31 by ocojeda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	init_rt(t_rt *env)
 	env->scene.nbr_tot = 0;
 	env->scene.obj = (t_obj *)malloc(sizeof(t_obj) * MAXOBJ);
 	env->scene.lights = (t_light *)malloc(sizeof(t_light) * MAXLIGHT);
-	env->scene.supersampling = 0;
+	env->scene.supersampling = 1 + DEFAULT_SUPERSAMPLING;
 }
 
 int		main(int argc, char **argv)
@@ -46,13 +46,7 @@ int		main(int argc, char **argv)
 		init_rt(env);
 		if (!parse_args(argv, argc, env))
 			return (0);
-		if (DEFAULT_SUPERSAMPLING == 1)
-		{
-			env->scene.supersampling = 1;
-			printf("%i\n", env->scene.supersampling);
-		}
-		env->mlx.window = mlx_new_window(env->mlx.init, env->file.larg, env->file.haut, "RT Again");	
-		
+		env->mlx.window = mlx_new_window(env->mlx.init, env->file.larg, env->file.haut, "RT Again");
 		frame(env);
 		//if (env->scene.supersampling)
 		//super_sampler(env);

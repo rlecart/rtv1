@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytrace.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfaure <tfaure@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ocojeda- <ocojeda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 16:26:32 by tfaure            #+#    #+#             */
-/*   Updated: 2017/08/14 13:56:09 by tfaure           ###   ########.fr       */
+/*   Updated: 2017/08/15 19:04:04 by ocojeda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,24 +110,16 @@ static t_color	get_pxl_color(t_rt *e, t_ray ray, t_color color)
 ** The camera is set to x y 0 for simplicity
 */
 
-int				raytrace(int x, int y, t_rt *env)
+t_color				raytrace(int x, int y, t_rt *env)
 {
 	t_ray		ray;
 	t_vec3		pov;
 	t_color		color;
 
 	color = c_color(0,0,0);
-
-	//unsigned int *img_temp;
-	//img_temp = (unsigned int *)semalloc(sizeof(unsigned int) * (LARGEUR * HAUTEUR));
-
 	pov = vec_new3((float)(x + env->scene.cam.ray.pos.x) / SS, 
 		(float)(y + env->scene.cam.ray.pos.y) / SS, 1);
 	ray = c_ray(pov, vec_new3(0, 0, 1));
 	color = get_pxl_color(env, ray, color);
-	//if (color.r != 0 && color.g != 0 && color.b != 0)
-	//{
-		mlx_pixel(x, y, env, ret_colors(color));
-	//}
-	return (1);
+	return (color);
 }
